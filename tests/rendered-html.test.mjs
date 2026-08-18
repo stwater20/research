@@ -33,9 +33,9 @@ test("server-renders the research toolkit", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("source includes all six local tools and the public publication examples", async () => {
+test("source includes all nine local tools and the public publication examples", async () => {
   const source = await readFile(new URL("../app/research-toolkit.tsx", import.meta.url), "utf8");
-  for (const expected of ["文獻矩陣", "研究問題框架", "引用產生器", "文字分析", "樣本數估算", "效果量計算"]) {
+  for (const expected of ["文獻矩陣", "研究問題框架", "引用產生器", "文字分析", "樣本數估算", "效果量計算", "描述統計", "2×2 效果指標", "識別碼整理"]) {
     assert.match(source, new RegExp(expected));
   }
   assert.match(source, /EnhanceCTI/);
@@ -52,6 +52,8 @@ test("publishes Traditional Chinese search metadata and discovery routes", async
   ]);
   assert.match(layout, /免費中文研究工具箱/);
   assert.match(layout, /APA 7 引用格式/);
+  assert.match(layout, /描述統計/);
+  assert.match(layout, /DOI 查詢/);
   assert.match(layout, /locale: "zh_TW"/);
   assert.match(layout, /max-image-preview/);
   assert.match(robots, /research\.sectools\.tw\/sitemap\.xml/);
