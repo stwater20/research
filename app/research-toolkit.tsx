@@ -77,6 +77,8 @@ export function ResearchToolkit() {
         </a>
         <nav aria-label="主要導覽">
           <a href="#tools">研究工具</a>
+          <a href="#guide">工具指南</a>
+          <a href="#faq">常見問題</a>
           <a href="#principles">使用原則</a>
           <span className="privacy-pill"><b /> LOCAL ONLY</span>
         </nav>
@@ -120,6 +122,32 @@ export function ResearchToolkit() {
             {active === "sample" && <SampleCalculator />}
             {active === "effect" && <EffectCalculator />}
           </div>
+        </div>
+      </section>
+
+      <section className="seo-guide" id="guide">
+        <div className="section-heading">
+          <div><p className="eyebrow">RESEARCH GUIDE / 02</p><h2>給中文研究者的<br />免費研究工具</h2></div>
+          <p>從定義研究問題到整理論文與解讀效果量，每個工具都對應一個常見的研究工作情境。</p>
+        </div>
+        <div className="guide-grid">
+          <article><span>01</span><h3>文獻矩陣與文獻回顧整理</h3><p>將作者、年份、研究方法、主要發現與研究缺口放在同一張文獻矩陣中，比較多篇論文時不再反覆翻找筆記。整理完成後可匯出 CSV。</p><a href="#tools">開啟文獻矩陣 →</a></article>
+          <article><span>02</span><h3>PICO／PECO 研究問題框架</h3><p>PICO 適合介入研究，PECO 適合暴露與觀察性研究。輸入族群、介入或暴露、比較與結果，即可建立適合學術資料庫的布林檢索式。</p><a href="#tools">建立研究問題 →</a></article>
+          <article><span>03</span><h3>APA 7、MLA 與 Chicago 引用</h3><p>輸入期刊文章的作者、年份、篇名、卷期、頁碼與 DOI，快速產生常見引用格式。正式投稿前仍應依目標期刊的作者指南核對。</p><a href="#tools">產生引用格式 →</a></article>
+          <article><span>04</span><h3>中英文文字與關鍵詞分析</h3><p>分析中文摘要或英文草稿的字數、句數、閱讀時間與高頻詞，協助檢查摘要長度、內容重點與重複用詞。</p><a href="#tools">分析研究文字 →</a></article>
+          <article><span>05</span><h3>問卷與比例研究樣本數計算</h3><p>依信心水準、容許誤差與預期比例估算最低樣本數，也能套用有限母體修正。適合問卷或盛行率研究的早期規劃。</p><a href="#tools">估算研究樣本數 →</a></article>
+          <article><span>06</span><h3>Cohen&apos;s d 效果量計算</h3><p>用兩組平均數、標準差與樣本數計算標準化平均差，快速判斷效果方向與大小。結果應搭配信賴區間及領域脈絡解讀。</p><a href="#tools">計算 Cohen&apos;s d →</a></article>
+        </div>
+      </section>
+
+      <section className="faq-section" id="faq">
+        <div><p className="eyebrow">QUESTIONS / 03</p><h2>研究工具常見問題</h2><p className="faq-lede">這些工具適合快速整理與初步估算，但不取代研究方法、統計或投稿規範的專業審查。</p></div>
+        <div className="faq-list">
+          <details open><summary>文獻矩陣是什麼？</summary><p>文獻矩陣是把多篇研究的作者、年份、方法、發現與缺口放在同一套欄位中比較。它能幫助你看出研究共識、矛盾與尚未回答的問題，是撰寫文獻回顧與系統性整理的實用起點。</p></details>
+          <details><summary>PICO 與 PECO 有什麼差別？</summary><p>PICO 的 I 代表介入，常用於治療、教育介入或實驗問題；PECO 的 E 代表暴露，較適合觀察性與風險因子研究。兩者都以 P（族群）、C（比較）與 O（結果）協助把研究問題轉成檢索概念。</p></details>
+          <details><summary>APA 引用產生器可以直接用於投稿嗎？</summary><p>產生器適合建立 APA 7、MLA 9 或 Chicago 引用初稿。不同期刊可能調整作者縮寫、標題大小寫、DOI 呈現或標點，因此投稿前仍應對照該期刊最新指南。</p></details>
+          <details><summary>樣本數與 Cohen&apos;s d 可以取代統計諮詢嗎？</summary><p>不可以。樣本數工具使用比例估計的基礎公式，Cohen&apos;s d 使用兩獨立組的合併標準差。正式研究仍需考量檢定力、分層或群聚設計、失訪率、分布假設與領域中的實質意義。</p></details>
+          <details><summary>輸入的研究資料會被上傳嗎？</summary><p>不會。研知的文字、文獻與數值運算都在瀏覽器中完成，不需要帳號，也不會把輸入內容傳送到遠端資料庫。請在離開頁面前匯出需要保留的文獻矩陣。</p></details>
         </div>
       </section>
 

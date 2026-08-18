@@ -23,6 +23,12 @@ test("server-renders the research toolkit", async () => {
   assert.match(html, /研知 Research Toolkit/);
   assert.match(html, /把時間留給/);
   assert.match(html, /文獻矩陣/);
+  assert.match(html, /給中文研究者的/);
+  assert.match(html, /PICO／PECO 研究問題框架/);
+  assert.match(html, /APA 7、MLA 與 Chicago 引用/);
+  assert.match(html, /研究工具常見問題/);
+  assert.match(html, /application\/ld\+json/);
+  assert.match(html, /FAQPage/);
   assert.match(html, /sectools\.tw\/tools/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
@@ -36,4 +42,18 @@ test("source includes all six local tools and the public publication examples", 
   assert.match(source, /Improving Quality of Indicators of Compromise/);
   assert.match(source, /BERT-CRF/);
   assert.match(source, /lgOY-SoAAAAJ/);
+});
+
+test("publishes Traditional Chinese search metadata and discovery routes", async () => {
+  const [layout, robots, sitemap] = await Promise.all([
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/robots.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/sitemap.ts", import.meta.url), "utf8"),
+  ]);
+  assert.match(layout, /免費中文研究工具箱/);
+  assert.match(layout, /APA 7 引用格式/);
+  assert.match(layout, /locale: "zh_TW"/);
+  assert.match(layout, /max-image-preview/);
+  assert.match(robots, /research\.sectools\.tw\/sitemap\.xml/);
+  assert.match(sitemap, /research\.sectools\.tw/);
 });
