@@ -105,3 +105,82 @@ export function normalizeAcademicIdentifier(input: string): AcademicIdentifier |
 
   return null;
 }
+
+function criticalZ(confidence: 90 | 95 | 99) {
+  return confidence === 90 ? 1.644854 : confidence === 99 ? 2.575829 : 1.959964;
+}
+
+export function meanConfidenceInterval(mean: number, sampleSd: number, sampleSize: number, confidence: 90 | 95 | 99 = 95) {
+  if (![mean, sampleSd, sampleSize].every(Number.isFinite) || sampleSd < 0 || sampleSize < 2) return null;
+  const df = sampleSize - 1;
+  const z = criticalZ(confidence);
+  const t = z
+    + (z ** 3 + z) / (4 * df)
+    + (5 * z ** 5 + 16 * z ** 3 + 3 * z) / (96 * df ** 2);
+  const margin = t * sampleSd / Math.sqrt(sampleSize);
+  return { lower: mean - margin, upper: mean + margin, margin, criticalValue: t };
+}
+
+export function proportionConfidenceInterval(successes: number, sampleSize: number, confidence: 90 | 95 | 99 = 95) {
+  if (![successes, sampleSize].every(Number.isFinite) || sampleSize < 1 || successes < 0 || successes > sampleSize) return null;
+  const z = criticalZ(confidence);
+  const proportion = successes / sampleSize;
+  const denominator = 1 + z ** 2 / sampleSize;
+  const center = (proportion + z ** 2 / (2 * sampleSize)) / denominator;
+  const margin = z * Math.sqrt(proportion * (1 - proportion) / sampleSize + z ** 2 / (4 * sampleSize ** 2)) / denominator;
+  return { proportion, lower: Math.max(0, center - margin), upper: Math.min(1, center + margin), margin };
+}
+
+export function parseNumericMatrix(input: string) {
+  const rows = input.trim().split(/\r?\n/).filter((row) => row.trim()).map((row) => row.trim().split(/[\t,，;； ]+/).map(Number));
+  if (rows.length < 2 || rows.some((row) => row.length < 2 || row.some((value) => !Number.isFinite(value)))) return null;
+  if (rows.some((row) => row.length !== rows[0].length)) return null;
+  return rows;
+}
+
+function sampleVariance(values: number[]) {
+  if (values.length < 2) return 0;
+  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+  return values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1);
+}
+
+export function cronbachAlpha(matrix: number[][]) {
+  if (matrix.length < 2 || matrix[0]?.length < 2 || matrix.some((row) => row.length !== matrix[0].length)) return null;
+  const itemCount = matrix[0].length;
+  const itemVariances = Array.from({ length: itemCount }, (_, column) => sampleVariance(matrix.map((row) => row[column])));
+  const totalVariance = sampleVariance(matrix.map((row) => row.reduce((sum, value) => sum + value, 0)));
+  if (totalVariance === 0) return null;
+  const alpha = itemCount / (itemCount - 1) * (1 - itemVariances.reduce((sum, value) => sum + value, 0) / totalVariance);
+  return { alpha, respondents: matrix.length, items: itemCount };
+}
+
+function hashSeed(seed: string) {
+  let value = 2166136261;
+  for (let index = 0; index < seed.length; index += 1) {
+    value ^= seed.charCodeAt(index);
+    value = Math.imul(value, 16777619);
+  }
+  return value >>> 0;
+}
+
+function seededRandom(seed: number) {
+  let value = seed;
+  return () => {
+    value += 0x6d2b79f5;
+    let mixed = value;
+    mixed = Math.imul(mixed ^ mixed >>> 15, mixed | 1);
+    mixed ^= mixed + Math.imul(mixed ^ mixed >>> 7, mixed | 61);
+    return ((mixed ^ mixed >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+export type RandomAssignment = { participant: string; group: string; order: number };
+
+export function assignRandomGroups(participants: string[], groupNames: string[], seed: string): RandomAssignment[] {
+  const cleanParticipants = [...new Set(participants.map((value) => value.trim()).filter(Boolean))];
+  const cleanGroups = [...new Set(groupNames.map((value) => value.trim()).filter(Boolean))];
+  if (!cleanParticipants.length || cleanGroups.length < 2 || !seed.trim()) return [];
+  const random = seededRandom(hashSeed(seed));
+  const shuffled = cleanParticipants.map((participant) => ({ participant, sort: random() })).sort((a, b) => a.sort - b.sort);
+  return shuffled.map(({ participant }, index) => ({ participant, group: cleanGroups[index % cleanGroups.length], order: index + 1 }));
+}

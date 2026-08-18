@@ -8,16 +8,16 @@ const serif = Newsreader({ variable: "--font-serif", subsets: ["latin"], style: 
 export const metadata: Metadata = {
   metadataBase: new URL("https://research.sectools.tw"),
   title: { default: "研知 Research Toolkit｜免費中文研究工具箱", template: "%s｜研知 Research Toolkit" },
-  description: "免費中文研究工具箱：文獻矩陣、PICO／PECO、APA 引用、描述統計、樣本數、Cohen's d、2×2 表格與 DOI 整理。免登入，資料不離開瀏覽器。",
-  keywords: ["研究工具", "免費研究工具", "中文研究工具", "文獻矩陣", "文獻回顧", "PICO", "PECO", "APA 7 引用格式", "引用產生器", "樣本數計算", "描述統計", "平均數計算", "標準差計算", "效果量計算", "風險比", "勝算比", "2x2 表格", "DOI 查詢", "PMID", "Cohen's d", "論文工具"],
+  description: "免費中文研究工具箱：文獻矩陣、PICO／PECO、APA 引用、描述統計、信賴區間、Cronbach's α、隨機分組與論文旅程。免登入，資料不離開瀏覽器。",
+  keywords: ["研究工具", "免費研究工具", "中文研究工具", "文獻矩陣", "文獻回顧", "PICO", "PECO", "APA 7 引用格式", "引用產生器", "樣本數計算", "描述統計", "平均數計算", "標準差計算", "信賴區間計算", "Cronbach alpha", "信度分析", "隨機分組", "研究隨機分派", "效果量計算", "風險比", "勝算比", "2x2 表格", "DOI 查詢", "PMID", "Cohen's d", "論文工具", "研究生工具", "論文口試", "等待審查", "拒稿"],
   authors: [{ name: "SecTools.tw", url: "https://sectools.tw/" }],
   creator: "SecTools.tw",
   publisher: "SecTools.tw",
   category: "Education",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
-  openGraph: { title: "研知 Research Toolkit｜免費中文研究工具箱", description: "文獻矩陣、PICO／PECO、APA 引用、描述統計、樣本數與研究效果指標，一站完成。", type: "website", url: "/", siteName: "研知 Research Toolkit", locale: "zh_TW", images: [{ url: "/og.png", width: 1536, height: 1024, alt: "研知 Research Toolkit 免費中文研究工具箱" }] },
-  twitter: { card: "summary_large_image", title: "研知 Research Toolkit｜免費中文研究工具箱", description: "把時間留給真正的問題。九個免費、隱私優先的中文研究工具。", images: ["/og.png"] },
+  openGraph: { title: "研知 Research Toolkit｜免費中文研究工具箱", description: "文獻矩陣、PICO／PECO、APA 引用、信賴區間、信度分析、隨機分組與論文旅程，一站完成。", type: "website", url: "/", siteName: "研知 Research Toolkit", locale: "zh_TW", images: [{ url: "/og.png", width: 1536, height: 1024, alt: "研知 Research Toolkit 免費中文研究工具箱" }] },
+  twitter: { card: "summary_large_image", title: "研知 Research Toolkit｜免費中文研究工具箱", description: "把時間留給真正的問題。十二個免費、隱私優先的中文研究工具。", images: ["/og.png"] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
