@@ -20,8 +20,8 @@ nav a:hover { color:var(--coral); }
 .hero-copy { padding:clamp(80px,10vw,140px) clamp(28px,8vw,120px); border-right:1px solid var(--line); position:relative; overflow:hidden; }
 .hero-copy:after { content:""; position:absolute; width:260px; height:260px; border:1px solid var(--sage); border-radius:50%; right:-155px; bottom:-110px; box-shadow:0 0 0 35px var(--paper),0 0 0 36px var(--line); }
 .eyebrow { font-size:11px; letter-spacing:.22em; color:#6d796f; font-weight:700; margin:0 0 24px; }
-.hero h1 { font:500 clamp(58px,7.2vw,106px)/.91 var(--font-serif),serif; letter-spacing:-.045em; margin:0; }
-.hero h1 em { color:var(--coral); font-weight:400; }
+.hero h1 { font:500 clamp(54px,6.2vw,104px)/.98 var(--font-serif),serif; letter-spacing:-.045em; margin:0; }
+.hero h1 em { color:var(--coral); display:inline-block; font-weight:400; white-space:nowrap; }
 .lede { max-width:560px; font-size:17px; line-height:1.8; color:#59645b; margin:34px 0; }
 .primary-button { display:inline-flex; align-items:center; gap:42px; padding:16px 18px 16px 22px; background:var(--forest); color:white; font-size:14px; }
 .primary-button span { width:28px; height:28px; border:1px solid #789082; display:grid; place-items:center; }
@@ -177,7 +177,7 @@ footer p,footer a { color:#9fb0a5; font-size:12px; }
 }
 @media (max-width:640px) {
   .site-header { height:66px; } .brand i,.privacy-pill { display:none; } nav { gap:0; }
-  .hero { min-height:auto; } .hero-copy { padding:80px 24px; } .hero h1 { font-size:58px; } .hero-board { min-height:420px; }
+  .hero { min-height:auto; } .hero-copy { padding:80px 24px; } .hero h1 { font-size:clamp(44px,13.5vw,56px); } .hero-board { min-height:420px; }
   .tool-section { padding:72px 14px; } .section-heading { display:block; padding:0 10px; } .section-heading>p { margin-top:20px; }
   .getting-started { margin:-5px 0 16px; } .getting-started li { display:flex; align-items:center; gap:7px; padding:10px 8px; } .getting-started li small { display:none; } .getting-started li span { flex:0 0 24px; width:24px; height:24px; } .getting-started li b { line-height:1.25; }
   .tool-nav button { flex-basis:185px; padding:15px 12px; grid-template-columns:25px 1fr; } .tool-nav button i { display:none; }
